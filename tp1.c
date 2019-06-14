@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 
 #define ARG_CODE_P  "-c"
@@ -11,6 +12,30 @@
 #define ARG_ENTREE "-i"
 #define ARG_SORTIE "-o"
 #define ARG_FIC_ALPHA "-a"
+
+//fonction qui verifier si -e ou -d est present retourne 0  pour crypter et  1 pour decrypter
+int verfierArgCryptage(char *tab[],int tailleTab){
+  int i = 1;
+  int codeRetour = -1;
+  int cryptage = 0;
+  int decryptage = 1;
+
+  for(i; i < tailleTab; i++){
+     if(strcmp(ARG_ENCRYPT,tab[i]) == 0){
+       codeRetour = cryptage;
+     }else if(strcmp(ARG_DECRYPT,tab[i]) == 0){
+       codeRetour = decryptage;
+     }
+  }
+
+  if(codeRetour == -1){
+    printf("argument -e ou -d nest pas present\n");
+    exit(4);
+  }
+
+  return codeRetour;
+
+}
 
 
 //fonction qui verifie si un argument obligatoire  est present
@@ -37,6 +62,26 @@ int verifierArgPresent(char *tab[],int tailleTab,char argument[],int codeErreur)
 }
 
 
+//fonction qui verifie si un String a juste des chiffre ou non
+
+void veriferChiffre(char *tab[],int indiceFixe){
+
+  int i = 0;
+  int taille = strlen(tab[indiceFixe]);
+
+  if(tab[indiceFixe][0] == '-'){
+    i = 1;
+  }
+
+  for(i; i < taille; i++){
+    char c = tab[indiceFixe][i];
+    if(!isdigit(c)){
+      printf("valeur de -k est non conforme\n");//--------- a retirer
+      exit(7);
+    }
+  }
+}
+
 
 
 int main(int argc,char * argv[]) {
@@ -45,22 +90,44 @@ int main(int argc,char * argv[]) {
   int indiceCodeP;
   int indiceCryptage;
   int indiceCle;
+  int indiceNombreSaut;
+
+
+  long cle;
 
   if(argc == 1){
     exit(1);
   }else{
    indiceCodeP =  verifierArgPresent(argv,argc,ARG_CODE_P,1) + 1;
+  }
 
+/*si  -c   a revoir
    if(indiceCodeP < argc && strlen(argv[indiceCodeP]) != 12){
      exit(1); //message erreur a mettre
-   }else if(indiceCodeP > argc){
+   }else if(indiceCodeP >= argc){
      exit(1);
    }
   }
+*/
 
 
 
+  indiceCryptage = verfierArgCryptage(argv,argc);
+  indiceNombreSaut  =  verifierArgPresent(argv,argc,ARG_CLE,7) + 1;
 
+//char *test[] = argv[indiceNombreSaut];
+//printf("le cara est : %s\n",argv[indiceNombreSaut]); 
+//printf("%d\n",strlen(argv[indiceNombreSaut]));
+
+
+  if(indiceNombreSaut >= argc){
+    printf("largument de -k est invalide");
+    exit(7);
+  }else{
+    veriferChiffre(argv,indiceNombreSaut);
+    cle = strtol(argv[indiceNombreSaut],NULL,10);
+printf("larg de -k est VALIDE = %ld",cle);//--------------------- a enlever
+  }
 
 
 
