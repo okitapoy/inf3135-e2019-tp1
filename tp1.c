@@ -13,6 +13,29 @@
 #define ARG_SORTIE "-o"
 #define ARG_FIC_ALPHA "-a"
 
+
+
+
+//fonction qui verifier larg -o ou -i, fichier entrant et sortant
+int verifierArgFichier(char *tab[],int tailleTab,char argument[]){
+  int i = 1;
+  int codeRetour = -1;
+
+
+  for(i; i < tailleTab; i++){
+     if(strcmp(argument,tab[i]) == 0){
+        codeRetour = i;
+     }
+
+  }
+
+  return codeRetour;
+
+}
+
+
+
+
 //fonction qui verifier si -e ou -d est present retourne 0  pour crypter et  1 pour decrypter
 int verfierArgCryptage(char *tab[],int tailleTab){
   int i = 1;
@@ -91,9 +114,12 @@ int main(int argc,char * argv[]) {
   int indiceCryptage;
   int indiceCle;
   int indiceNombreSaut;
-
+  int indiceFichierEntree;
+  int indiceFichierSortie;
 
   long cle;
+  char fichierEntree[100];
+  char fichierSortie[100];
 
   if(argc == 1){
     exit(1);
@@ -119,7 +145,7 @@ int main(int argc,char * argv[]) {
 //printf("le cara est : %s\n",argv[indiceNombreSaut]); 
 //printf("%d\n",strlen(argv[indiceNombreSaut]));
 
-
+//valider la cle et transformenr en string
   if(indiceNombreSaut >= argc){
     printf("largument de -k est invalide");
     exit(7);
@@ -130,6 +156,22 @@ printf("larg de -k est VALIDE = %ld",cle);//--------------------- a enlever
   }
 
 
+//fichier en entree 
+  indiceFichierEntree = verifierArgFichier(argv,argc,ARG_ENTREE) + 1;
+  if(indiceFichierEntree != 0){
+    if(indiceFichierEntree >= argc){
+      printf("l'argument -i n'a pas de valeur\n");
+      exit(5);
+    }else{
+      strcpy(fichierEntree,argv[indiceFichierEntree]);
+printf("le nom du fichier est : %s\n",fichierEntree);//-------------------a enlever
+    }
+
+  }
+
+
+//fichier en sortie 
+  indiceFichierEntree = verifierArgFichier(argv,argc,ARG_SORTIE) + 1;
 
 
 
