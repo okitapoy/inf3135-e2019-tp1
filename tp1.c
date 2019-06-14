@@ -116,10 +116,14 @@ int main(int argc,char * argv[]) {
   int indiceNombreSaut;
   int indiceFichierEntree;
   int indiceFichierSortie;
+  int indiceFichierAlpha;
 
   long cle;
   char fichierEntree[100];
   char fichierSortie[100];
+  char fichierAlpha[100];
+
+
 
   if(argc == 1){
     exit(1);
@@ -152,7 +156,7 @@ int main(int argc,char * argv[]) {
   }else{
     veriferChiffre(argv,indiceNombreSaut);
     cle = strtol(argv[indiceNombreSaut],NULL,10);
-printf("larg de -k est VALIDE = %ld",cle);//--------------------- a enlever
+printf("larg de -k est VALIDE = %ld\n",cle);//--------------------- a enlever
   }
 
 
@@ -171,8 +175,32 @@ printf("le nom du fichier est : %s\n",fichierEntree);//-------------------a enle
 
 
 //fichier en sortie 
-  indiceFichierEntree = verifierArgFichier(argv,argc,ARG_SORTIE) + 1;
+  indiceFichierSortie = verifierArgFichier(argv,argc,ARG_SORTIE) + 1;
+  if(indiceFichierSortie != 0){
+    if(indiceFichierSortie >= argc){
+      printf("l'argument -o n'a pas de valeur\n");
+      exit(6);
+    }else{
+      strcpy(fichierSortie,argv[indiceFichierSortie]);
+printf("le nom du fichier est : %s\n",fichierSortie);//-------------------a enlever
+    }
 
+  }
+
+
+
+//fichier alpha
+  indiceFichierAlpha = verifierArgFichier(argv,argc,ARG_FIC_ALPHA) + 1;
+  if(indiceFichierAlpha != 0){
+    if(indiceFichierAlpha >= argc){
+      printf("l'argument -a n'a pas de valeur\n");
+      exit(8);
+    }else{
+      strcpy(fichierAlpha,argv[indiceFichierAlpha]);
+printf("le nom du fichier est : %s\n",fichierAlpha);//-------------------a enlever
+    }
+
+  }
 
 
 
