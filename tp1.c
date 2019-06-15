@@ -16,7 +16,7 @@
 
 
 
-//fonction qui verifier larg -o ou -i, fichier entrant et sortant
+//fonction qui verifier l'arg -o ou -i, fichier entrant et sortant
 int verifierArgFichier(char *tab[],int tailleTab,char argument[]){
   int i = 1;
   int codeRetour = -1;
