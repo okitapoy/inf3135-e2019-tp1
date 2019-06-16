@@ -169,6 +169,27 @@ printf("larg de -k est VALIDE = %ld\n",cle);//--------------------- a enlever
     }else{
       strcpy(fichierEntree,argv[indiceFichierEntree]);
 printf("le nom du fichier est : %s\n",fichierEntree);//-------------------a enlever
+
+  FILE *fichierIn = NULL;
+  int caractere;
+  fichierIn = fopen(fichierEntree,"r+");
+
+  if(fichierIn != NULL){
+    do{
+
+       caractere = fgetc(fichierIn);
+printf("%c",caractere);
+   }while(caractere != EOF);
+
+    fclose(fichierIn);
+  }else{
+printf("erreur du fichier ENTREE\n");//-----------a retirer
+    exit(5);
+
+  }
+
+
+
     }
 
   }
