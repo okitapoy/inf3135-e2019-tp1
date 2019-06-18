@@ -44,4 +44,4 @@ Il va encoder et mettre le résultat, qui sera ( ucnwv), dans le fichier out.txt
 
    ## Statut
 
-   Non complet
+   COMPLETÉ

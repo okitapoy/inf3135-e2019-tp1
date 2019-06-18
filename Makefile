@@ -27,10 +27,7 @@ test:
 
 
 test2:
-	./tp1 -c OKIK08078702 -d -k 80 
-
-test3:
-	./tp1 -d -k 2 -i in.txt -c OKIK08078702 -o out.txt -k -9999 -a ./alpha/
+	./tp1 -c OKIK08078702 -e -k 80 
 
 
 .PHONY: clean
