@@ -15,6 +15,34 @@
 #define ALPHA "alphabet.txt"
 #define ALPHA_SLASH "/alphabet.txt"
 
+void valider(char *tab[],int taille){
+
+   for(int i = 1; i < taille; i++){
+      if(tab[i][0] == '-' && strcmp(tab[i-1],"-k") != 0){
+      printf("%s\n",tab[i]);//-------------
+
+       if(strcmp(tab[i],ARG_CODE_P) != 0 && strcmp(tab[i],ARG_ENCRYPT) != 0 && strcmp(tab[i],ARG_DECRYPT) != 0 && 
+          strcmp(tab[i],ARG_CLE) != 0 &&  strcmp(tab[i],ARG_ENTREE) != 0 &&  strcmp(tab[i],ARG_SORTIE) != 0 && 
+         strcmp(tab[i],ARG_FIC_ALPHA) != 0 ){
+
+         printf("larguemnt  %s  est invalide\n",tab[i]);
+
+
+           if(strcmp(tab[i-1],ARG_SORTIE) != 0 && strcmp(tab[i-1],ARG_ENTREE) != 0 &&
+              strcmp(tab[i-1],ARG_FIC_ALPHA) != 0 ){
+
+              printf("un argument present est invalide\n");
+             exit(3);
+           }
+
+        }
+
+      }
+
+   }
+
+}
+
 int nbrSautLigne(char *tablo){
    int nombre = 0;
 
@@ -268,11 +296,12 @@ int main(int argc,char * argv[]) {
   char  *pointeurEntree = NULL;
   char  *pointeurAlpha = NULL;
 
-
+ // valider(argv,argc);
 
   if(argc == 1){
     exit(1);
   }else{
+   valider(argv,argc);
    indiceCodeP =  verifierArgPresent(argv,argc,ARG_CODE_P,1) + 1;
   }
 
