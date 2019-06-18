@@ -8,7 +8,7 @@ tp1: tp1.o
 	gcc $(OPTIONS) -o tp1 tp1.o
 
 tp1.o: tp1.c
-	gcc -c tp1.c
+	gcc $(OPTIONS) -c tp1.c
 
 
 data:
@@ -25,6 +25,12 @@ resultat:
 test:
 	./tp1 -c OKIK08078702 -e -k 17  -i ./data/crypto-msg01.in -o ./data/crypto-msg01.out
 
+
+test2:
+	./tp1 -c OKIK08078702 -d -k 80 
+
+test3:
+	./tp1 -d -k 2 -i in.txt -c OKIK08078702 -o out.txt -k -9999 -a ./alpha/
 
 
 .PHONY: clean

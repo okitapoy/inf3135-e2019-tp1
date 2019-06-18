@@ -115,7 +115,7 @@ void cryptage(char *leTexte,char *alphabet,long lePas){
 
 //lit le fichier entree et cree une varabile de la chaine avec pointeur
 void lireFichier(char *pointeur, const char fichierEntree[],int taille,int erreur){
-     char *p;
+//     char *p;
 
   FILE *fichierIn = NULL;
   char caractere;
@@ -172,11 +172,11 @@ int longueurFichier(const char fichierEntree[]){
 
 
 int verifierArgFichier(char *tab[],int tailleTab,char argument[]){
-  int i = 1;
+ // int i = 1;
   int codeRetour = -1;
 
 
-  for(i; i < tailleTab; i++){
+  for(int i = 1; i < tailleTab; i++){
      if(strcmp(argument,tab[i]) == 0){
         codeRetour = i;
      }
@@ -190,14 +190,14 @@ int verifierArgFichier(char *tab[],int tailleTab,char argument[]){
 
 
 
-//fonction qui verifier si -e ou -d est present retourne 0  pour crypter et  1 pour decrypter
+//fonction qui verifier si -e ou -d est present retourne 1  pour crypter et -1 pour decrypter
 int verfierArgCryptage(char *tab[],int tailleTab){
-  int i = 1;
-  int codeRetour = -1;
-  int cryptage = 0;
-  int decryptage = 1;
+ // int i = 1;
+  int codeRetour = 0;
+  int cryptage = 1;
+  int decryptage = -1;
 
-  for(i; i < tailleTab; i++){
+  for(int i = 1; i < tailleTab; i++){
      if(strcmp(ARG_ENCRYPT,tab[i]) == 0){
        codeRetour = cryptage;
      }else if(strcmp(ARG_DECRYPT,tab[i]) == 0){
@@ -205,12 +205,12 @@ int verfierArgCryptage(char *tab[],int tailleTab){
      }
   }
 
-  if(codeRetour == -1){
+  if(codeRetour == 0){
     printf("argument -e ou -d n'est pas present\n");
     exit(4);
   }
 
-  return codeRetour;
+   return codeRetour;
 
 }
 
@@ -218,10 +218,10 @@ int verfierArgCryptage(char *tab[],int tailleTab){
 //fonction qui verifie si un argument obligatoire  est present
 
 int verifierArgPresent(char *tab[],int tailleTab,char argument[],int codeErreur){
-  int i = 1;
+//  int i = 1;
   int codeRetour = -1;
 
-  for(i; i < tailleTab; i++){
+  for(int i = 1; i < tailleTab; i++){
      if(strcmp(argument,tab[i]) == 0){
        codeRetour = i;
      }
@@ -241,14 +241,14 @@ int verifierArgPresent(char *tab[],int tailleTab,char argument[],int codeErreur)
 
 void veriferChiffre(char *tab[],int indiceFixe){
 
-  int i = 0;
+  int n = 0;
   int taille = strlen(tab[indiceFixe]);
 
   if(tab[indiceFixe][0] == '-'){
-    i = 1;
+    n = 1;
   }
 
-  for(i; i < taille; i++){
+  for(int i = n; i < taille; i++){
     char c = tab[indiceFixe][i];
     if(!isdigit(c)){
       printf("valeur de -k non conforme\n");
@@ -264,7 +264,7 @@ int main(int argc,char * argv[]) {
   //indice d'ou se trouve les args dans le tableau
   int indiceCodeP;
   int indiceCryptage;
-  int indiceCle;
+ // int indiceCle;
   int indiceNombreSaut;
   int indiceFichierEntree;
   int indiceFichierSortie;
@@ -301,7 +301,7 @@ int main(int argc,char * argv[]) {
 
 
 
-  indiceCryptage = verfierArgCryptage(argv,argc);
+  indiceCryptage = verfierArgCryptage(argv,argc);//-----------------
   indiceNombreSaut  =  verifierArgPresent(argv,argc,ARG_CLE,7) + 1;
 
 
@@ -312,6 +312,7 @@ int main(int argc,char * argv[]) {
   }else{
     veriferChiffre(argv,indiceNombreSaut);
     cle = strtol(argv[indiceNombreSaut],NULL,10);
+    cle = cle * indiceCryptage;//------------------
   }
 
 
@@ -325,7 +326,7 @@ int main(int argc,char * argv[]) {
       strcpy(fichierEntree,argv[indiceFichierEntree]);
 
      int sizeFichierEntree = longueurFichier(fichierEntree);
-     char chaineEntree[sizeFichierEntree];
+    // char chaineEntree[sizeFichierEntree];
 
     pointeurEntree = (char*) malloc(sizeFichierEntree * sizeof(char));
    lireFichier(pointeurEntree,fichierEntree,sizeFichierEntree,5);
@@ -368,7 +369,7 @@ int main(int argc,char * argv[]) {
 
   }
    int sizeFichierAlpha = longueurFichier(fichierAlpha);
-   char chaineAlpha[sizeFichierAlpha];
+  // char chaineAlpha[sizeFichierAlpha];
 
    pointeurAlpha = (char*) malloc(sizeFichierAlpha * sizeof(char));
    lireFichier(pointeurAlpha,fichierAlpha,sizeFichierAlpha,8);
