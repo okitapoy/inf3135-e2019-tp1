@@ -5,7 +5,7 @@ CP = cp.txt
 default: tp1 
 
 tp1: tp1.o
-	gcc -o tp1 tp1.o
+	gcc $(OPTIONS) -o tp1 tp1.o
 
 tp1.o: tp1.c
 	gcc -c tp1.c
@@ -21,6 +21,9 @@ resultat:
 	git add note-du-tp.txt
 	git commit -m "ajout resultat"
 	git push origin master
+
+test:
+	./tp1 -c OKIK08078702 -e -k -180 -i in.txt -o out.txt
 
 
 
