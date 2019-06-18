@@ -2,8 +2,8 @@
 
    ## Description
 
-   Un petit programme qui fait de la cryptographie. La methode ce césar (Caeser cipher) sera celle utilisé dans ce programme pour le cryptage des textes.
-   Dans le cadre du cours INF313 de l'Université du Quebec à Montréal.
+   Un petit programme qui fait de la cryptographie. La méthode  de césar (Caeser cipher) sera celle utilisée dans ce programme pour le cryptage des textes.
+   Dans le cadre du cours INF3135 de l'Université du Quebec à Montréal.
 
    ## Auteur
 
@@ -19,7 +19,7 @@ Exemple :
 
 Le prgramme demndera a l'utilisateur de taper le texte au clavier et affichera le résultat à l’écran. 
 
-* ./tp1 -c OKIK08078702 -d -k 8 -i in.txt -o out.txt -a ./alpha/
+* ./tp1 -c OKIK08078702 -e -k 80 -i in.txt -o out.txt -a ./alpha/
 
 Le programme va récupérer le contenu du fichier in.txt (ex : salut).
 Il va encoder et mettre le résultat, qui sera ( ucnwv), dans le fichier out.txt 

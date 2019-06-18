@@ -19,13 +19,11 @@ void valider(char *tab[],int taille){
 
    for(int i = 1; i < taille; i++){
       if(tab[i][0] == '-' && strcmp(tab[i-1],"-k") != 0){
-      printf("%s\n",tab[i]);//-------------
 
        if(strcmp(tab[i],ARG_CODE_P) != 0 && strcmp(tab[i],ARG_ENCRYPT) != 0 && strcmp(tab[i],ARG_DECRYPT) != 0 && 
           strcmp(tab[i],ARG_CLE) != 0 &&  strcmp(tab[i],ARG_ENTREE) != 0 &&  strcmp(tab[i],ARG_SORTIE) != 0 && 
          strcmp(tab[i],ARG_FIC_ALPHA) != 0 ){
 
-         printf("larguemnt  %s  est invalide\n",tab[i]);
 
 
            if(strcmp(tab[i-1],ARG_SORTIE) != 0 && strcmp(tab[i-1],ARG_ENTREE) != 0 &&
@@ -53,7 +51,6 @@ int nbrSautLigne(char *tablo){
     }
 
    }
-printf("nombre saut ligne = %d\n",nombre);
 
 
    return nombre;
@@ -64,13 +61,9 @@ printf("nombre saut ligne = %d\n",nombre);
 void cryptage(char *leTexte,char *alphabet,long lePas){
 
      int nombreSaut = nbrSautLigne(alphabet);
-    //char alphabet[] = "qbcefghijzklnodprstuvawxym";
     long alphaLength = strlen(alphabet) - nombreSaut;
-   printf("alpha length=== %d\n",alphaLength);
 
-   // long lePas = 117;
 
-    //char leTexte[] = "zoe est partie a la fois sais-tu valz"; //
     long textLength = strlen(leTexte);
 
     if(lePas > alphaLength){
@@ -88,12 +81,9 @@ void cryptage(char *leTexte,char *alphabet,long lePas){
 
             for(int n = 0; n < alphaLength;n++){
                 if(leTexte[i] == alphabet[n]){
-                  // printf("alpha num : %d, lettre : %c, alpha length : %d\n",n,leTexte[i],alphaLength);//---
                     if(n + lePas < alphaLength && n + lePas >= 0 ){
-                      //  printf("\non est dans le tablo");
                         leTexte[i] =  alphabet[n + lePas];
                     }else{
-                       // printf("\nerreur on deborde");
                         if(lePas > 0){
 
                             long difference = (alphaLength) - n;
@@ -138,7 +128,6 @@ void lireFichier(char *pointeur, const char fichierEntree[],int taille,int erreu
 
        caractere = fgetc(fichierIn);
 
-printf("%c",caractere);
        if(indice < taille && caractere != EOF){
        pointeur[indice] = caractere;
        indice++;
@@ -160,7 +149,6 @@ printf("\n");
 
 
 
-//retourne la longueur du  texte en entier, nombre de caractere
 int longueurFichier(const char fichierEntree[]){
 
 
@@ -183,7 +171,6 @@ int longueurFichier(const char fichierEntree[]){
 }
 
 
-//fonction qui verifier l'arg -o ou -i, fichier entrant et sortant
 int verifierArgFichier(char *tab[],int tailleTab,char argument[]){
   int i = 1;
   int codeRetour = -1;
@@ -219,7 +206,7 @@ int verfierArgCryptage(char *tab[],int tailleTab){
   }
 
   if(codeRetour == -1){
-    printf("argument -e ou -d nest pas present\n");
+    printf("argument -e ou -d n'est pas present\n");
     exit(4);
   }
 
@@ -241,11 +228,9 @@ int verifierArgPresent(char *tab[],int tailleTab,char argument[],int codeErreur)
   }
 
   if(codeRetour ==  -1){
-  printf("arg non trouver eeeerrruurr erreur : %d \n",codeErreur);//-------- ligne a retire
    exit(codeErreur);
   }
 
-  printf("l'argument : %s, a ete trouver a lindice %d\n",argument,codeRetour);
 
   return codeRetour;
 
@@ -266,7 +251,7 @@ void veriferChiffre(char *tab[],int indiceFixe){
   for(i; i < taille; i++){
     char c = tab[indiceFixe][i];
     if(!isdigit(c)){
-      printf("valeur de -k est non conforme\n");//--------- a retirer
+      printf("valeur de -k non conforme\n");
       exit(7);
     }
   }
@@ -290,15 +275,15 @@ int main(int argc,char * argv[]) {
   char fichierSortie[100];
   char fichierAlpha[100];
 
-  //int sizeFichierEntree = 0;
 
 
   char  *pointeurEntree = NULL;
   char  *pointeurAlpha = NULL;
 
- // valider(argv,argc);
 
   if(argc == 1){
+  printf("ERREUR 1.Vous devez entrer les arguments comme l'exemple ci dessous.\n");
+  fprintf(stderr, "Usage: %s <-c CODEpermanent> <-d | -e> <-k valeur> [-i fichier.in] [-o fichier.out] [-a chemin]\n", argv[0]);
     exit(1);
   }else{
    valider(argv,argc);
@@ -306,8 +291,8 @@ int main(int argc,char * argv[]) {
   }
 
    if(indiceCodeP < argc && strlen(argv[indiceCodeP]) != 12){
-    printf("la valeur de -c doit etre de 12 caracteres\n");
-     exit(1); //message erreur a mettre
+    printf("ERREUR 2.la valeur de -c doit etre de 12 caracteres\n");
+     exit(2);
    }else if(indiceCodeP >= argc){
      exit(1);
    }
@@ -322,12 +307,11 @@ int main(int argc,char * argv[]) {
 
 //valider la cle et transformenr en string
   if(indiceNombreSaut >= argc){
-    printf("largument de -k est invalide");
+    printf("ERREUR 7.largument de -k est invalide");
     exit(7);
   }else{
     veriferChiffre(argv,indiceNombreSaut);
     cle = strtol(argv[indiceNombreSaut],NULL,10);
-printf("larg de -k est VALIDE = %ld\n",cle);//--------------------- a enlever
   }
 
 
@@ -335,11 +319,10 @@ printf("larg de -k est VALIDE = %ld\n",cle);//--------------------- a enlever
   indiceFichierEntree = verifierArgFichier(argv,argc,ARG_ENTREE) + 1;
   if(indiceFichierEntree != 0){
     if(indiceFichierEntree >= argc){
-      printf("l'argument -i n'a pas de valeur\n");
+      printf("ERREUR 5.l'argument -i n'a pas de valeur\n");
       exit(5);
     }else{
       strcpy(fichierEntree,argv[indiceFichierEntree]);
-printf("le nom du fichier est : %s\n",fichierEntree);//-------------------a enlever
 
      int sizeFichierEntree = longueurFichier(fichierEntree);
      char chaineEntree[sizeFichierEntree];
@@ -351,12 +334,11 @@ printf("le nom du fichier est : %s\n",fichierEntree);//-------------------a enle
 
   }else{
     pointeurEntree = (char*) malloc(1000 * sizeof(char));
-    printf("Veillez entrer le texte :  ");
+    printf("Veillez entrer le texte pour le cryptage/decryptage :  ");
    fgets(pointeurEntree,1000,stdin);
   }
 
 
-printf("pointeur string entree :  %s \n",pointeurEntree);//----------------------
 
 
 
@@ -366,26 +348,23 @@ printf("pointeur string entree :  %s \n",pointeurEntree);//---------------------
   indiceFichierAlpha = verifierArgFichier(argv,argc,ARG_FIC_ALPHA) + 1;
   if(indiceFichierAlpha != 0){
     if(indiceFichierAlpha >= argc){
-      printf("l'argument -a n'a pas de valeur\n");
+      printf("ERREUR 8.l'argument -a n'a pas de valeur\n");
       exit(8);
     }else{
       strcpy(fichierAlpha,argv[indiceFichierAlpha]);
 
       if(fichierAlpha[strlen(fichierAlpha)-1] == '/'){
-       printf("ca fini avec le  slaashhhh");
        strcat(fichierAlpha,ALPHA);
       }else{
       strcat(fichierAlpha,ALPHA_SLASH);
 
       }
 
-printf("le nom du fichier est : %s\n",fichierAlpha);//-------------------a enlever
 
     }
 
   }else{
       strcpy(fichierAlpha,ALPHA);
-  printf("larg -a pas present, remplacer par default alphabet.txt\n");
 
   }
    int sizeFichierAlpha = longueurFichier(fichierAlpha);
@@ -393,12 +372,10 @@ printf("le nom du fichier est : %s\n",fichierAlpha);//-------------------a enlev
 
    pointeurAlpha = (char*) malloc(sizeFichierAlpha * sizeof(char));
    lireFichier(pointeurAlpha,fichierAlpha,sizeFichierAlpha,8);
-printf("la chaine alpha : %s\n",pointeurAlpha);
 
 
 
 cryptage(pointeurEntree,pointeurAlpha,cle);
-printf("nouveau apres cryptage : %s\n",pointeurEntree);
 
 
 
@@ -406,11 +383,10 @@ printf("nouveau apres cryptage : %s\n",pointeurEntree);
   indiceFichierSortie = verifierArgFichier(argv,argc,ARG_SORTIE) + 1;
   if(indiceFichierSortie != 0){
     if(indiceFichierSortie >= argc){
-      printf("l'argument -o n'a pas de valeur\n");
+      printf("ERREUR 6.l'argument -o n'a pas de valeur\n");
       exit(6);
     }else{
       strcpy(fichierSortie,argv[indiceFichierSortie]);
-printf("le nom du fichier est : %s\n",fichierSortie);//-------------------a enlever
 
     FILE *fichierOut = NULL;
     fichierOut = fopen(fichierSortie,"w");
@@ -419,7 +395,7 @@ printf("le nom du fichier est : %s\n",fichierSortie);//-------------------a enle
    fclose(fichierOut);
 
    }else{
-   printf("erreur avec le fichier sortie");
+   printf("ERREUR 6.erreur avec le fichier sortie");
    exit(6);
    }
 

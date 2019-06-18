@@ -23,7 +23,7 @@ resultat:
 	git push origin master
 
 test:
-	./tp1 -c OKIK08078702 -e -k -180 -mammo -i in.txt -o out.txt
+	./tp1 -c OKIK08078702 -e -k 17  -i ./data/crypto-msg01.in -o ./data/crypto-msg01.out
 
 
 
