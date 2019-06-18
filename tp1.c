@@ -26,7 +26,7 @@ int nbrSautLigne(char *tablo){
 
    }
 printf("nombre saut ligne = %d\n",nombre);
-//exit(1);
+
 
    return nombre;
 }
