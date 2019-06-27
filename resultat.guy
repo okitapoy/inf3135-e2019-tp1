@@ -1,5 +1,4 @@
-0 : reussi 0 pts
-1 : reussi 1 pts
+1 : reussi 0 pts
 2 : reussi 1 pts
 3 : reussi 1 pts
 4 : reussi 1 pts
@@ -8,8 +7,8 @@
 7 : reussi 1 pts
 8 : reussi 1 pts
 9 : reussi 1 pts
-10 : reussi 0 pts
-11 : reussi 1 pts
+10 : reussi 1 pts
+11 : reussi 0 pts
 12 : reussi 1 pts
 13 : reussi 1 pts
 14 : reussi 1 pts
@@ -19,15 +18,16 @@
 18 : reussi 1 pts
 19 : reussi 1 pts
 20 : reussi 1 pts
-21 : reussi 0 pts
-22 : reussi 1 pts
-23 : echec
-24 : reussi 0 pts
-25 : reussi 1 pts
+21 : reussi 1 pts
+22 : reussi 0 pts
+23 : reussi 1 pts
+24 : echec
+25 : reussi 0 pts
 26 : reussi 1 pts
 27 : reussi 1 pts
-28 : reussi 0 pts
-29 : reussi 1 pts
-30 : echec
+28 : reussi 1 pts
+29 : reussi 0 pts
+30 : reussi 1 pts
+31 : echec
 Note (total) pour OKIK08078702 dans inf3135-e2019-tp1: 24
 OKIK08078702	24
